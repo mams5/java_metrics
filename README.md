@@ -107,6 +107,127 @@ JavaParser is used to perform Java source code parsing and syntactic analysis, e
 
 ---
 
+## Maven Installation Guide (Windows)
+
+Follow the steps below to install and configure Apache Maven on Windows.
+
+### 1. Install Java JDK
+
+Make sure Java is installed before configuring Maven.
+
+Check your Java installation:
+
+```bash
+java -version
+```
+
+If Java is not installed, download and install a JDK:
+
+- https://adoptium.net/temurin/releases/
+
+---
+
+## 2. Download Maven
+
+Download the latest binary version of Maven from the official website:
+
+- https://maven.apache.org/download.cgi
+
+Download the file named:
+
+```text
+Binary zip archive
+```
+
+Example:
+
+```text
+apache-maven-3.x.x-bin.zip
+```
+
+---
+
+## 3. Extract Maven
+
+Extract the downloaded ZIP file to a directory of your choice.
+
+Example:
+
+```text
+C:\Program Files\Maven
+```
+
+After extraction, the folder structure should look like this:
+
+```text
+Maven
+ ├── bin
+ ├── boot
+ ├── conf
+ └── lib
+```
+
+---
+
+## 4. Configure Environment Variables
+
+Open:
+
+```text
+Control Panel → System → Advanced System Settings → Environment Variables
+```
+
+### Create a new system variable
+
+Variable name:
+
+```text
+MAVEN_HOME
+```
+
+Variable value:
+
+```text
+C:\Program Files\Maven
+```
+
+---
+
+### Update the `Path` variable
+
+Add the following entry:
+
+```text
+%MAVEN_HOME%\bin
+```
+
+---
+
+## 5. Restart the Terminal
+
+Close and reopen your terminal (CMD or PowerShell).
+
+---
+
+## 6. Verify Installation
+
+Run the following command:
+
+```bash
+mvn -version
+```
+
+Expected output:
+
+```text
+Apache Maven x.x.x
+Java version: xx
+```
+
+If the version information appears, Maven has been successfully installed and configured.
+
+---
+
 # ▶️ How to Run
 
 ## 1️⃣ Clone the repository
