@@ -127,7 +127,7 @@ If Java is not installed, download and install a JDK:
 
 ---
 
-## 2. Download Maven
+## 2. Download Maven 
 
 Download the latest binary version of Maven from the official website:
 
