@@ -13,7 +13,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("===Bem vindo ao JavaMetric===");
-        System.out.print("insira o caminho do seu codigo para começar a analise: ");
+        System.out.print("Insira o caminho do seu codigo para começar a analise: ");
         
         // Input
         String inputPath = scanner.nextLine();
@@ -35,13 +35,13 @@ public class Main {
             String sourceCode = Files.readString(filePath);
 
             System.out.println("\nArquivo carregado com sucesso!");
-            System.out.println("Iniciando análise com JavaParser...\n");
+            System.out.println("Iniciando análise...\n");
 
-            // Feature method.Sizes
+            // Features
             methodSizes.analyze(sourceCode);
 
             // Output
-            reportGenerator.generate();
+            reportGenerator.generateMethodSizes();
 
         } catch (Exception e) {
             System.err.println("\nErro ao processar a análise: " + e.getMessage());
