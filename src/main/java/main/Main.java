@@ -38,7 +38,7 @@ public class Main {
             System.out.println("Iniciando análise...\n");
 
             // Features
-            methodSizes.analyze(sourceCode);
+            //methodSizes.analyze(sourceCode);
 
             // Output
             reportGenerator.generateMethodSizes();
