@@ -233,25 +233,25 @@ If the version information appears, Maven has been successfully installed and co
 ## 1️⃣ Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/mams5/java_metrics.git
 ```
 
 ## 2️⃣ Access the project folder
 
 ```bash
-cd project-name
+cd java_metrics
 ```
 
 ## 3️⃣ Build with Maven
 
 ```bash
-mvn clean install
+mvn compile
 ```
 
 ## 4️⃣ Run the project
 
 ```bash
-mvn exec:java
+mvn -q exec:java
 ```
 
 ---
