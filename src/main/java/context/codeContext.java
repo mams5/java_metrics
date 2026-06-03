@@ -1,4 +1,4 @@
-package main.java.context;
+package context;
 
 public class codeContext {
     // número máximo de linhas de código úteis que um método deve ter

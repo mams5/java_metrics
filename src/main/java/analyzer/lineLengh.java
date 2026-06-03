@@ -1,1 +1,1 @@
-package main.java.analyzer;
+package analyzer;

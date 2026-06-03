@@ -1,1 +1,1 @@
-package main.java.scoring;
+package scoring;

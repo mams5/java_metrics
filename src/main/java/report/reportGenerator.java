@@ -1,6 +1,6 @@
-package main.java.report;
+package report;
 
-import main.java.context.codeContext;
+import context.codeContext;
 
 public class reportGenerator {
 
