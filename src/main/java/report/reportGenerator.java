@@ -77,5 +77,6 @@ public class reportGenerator {
         double npc = scoringEngine.getNpcScore();
         System.out.printf("Nota NPC (0 a 1): %.2f\n", npc);
         System.out.println("==================================================");
+        
     }
 }
