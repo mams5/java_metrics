@@ -104,7 +104,8 @@ public class lineLengh {
 
     private static String trimContent(String line) {
         String t = line.trim();
-        return t.length() <= 80 ? t : t.substring(0, 80) + "...";
+        int limit = codeContext.LINE_LENGTH_BENCHMARK;
+        return t.length() <= limit ? t : t.substring(0, limit) + "...";
     }
 
     private static String suggestFix(String line) {
