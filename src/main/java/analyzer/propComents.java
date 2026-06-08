@@ -32,7 +32,7 @@ public class propComents {
         }
         codeContext.totalCommentLines = commentLines.size();
 
-        int qtLinhasUteis = 0;
+        int usefulLinesQt = 0;
         String[] lines = sourceCode.split("\\r?\\n");
         
         for (int i = 0; i < lines.length; i++) {
@@ -41,9 +41,9 @@ public class propComents {
 
             // Uma linha é útil se NÃO estiver em branco e NÃO for um comentário
             if (!trimmedLine.isEmpty() && !commentLines.contains(currentLineNumber)) {
-                qtLinhasUteis++;
+                usefulLinesQt++;
             }
         }
-        codeContext.totalUsefulLines = qtLinhasUteis;
+        codeContext.usefulLines = usefulLinesQt;
     }
 }

@@ -1,7 +1,7 @@
 package main;
 
 import analyzer.lineLengh;
-import analyzer.methodSizes;
+//import analyzer.methodSizes;
 import analyzer.structuresDensity;
 import context.codeContext;
 import analyzer.propComents;
@@ -44,7 +44,7 @@ public class Main {
             // Features
             lineLengh.analyze(sourceCode);
             //methodSizes.analyze(sourceCode);
-            //structuresDensity.analyze(filePath);
+            structuresDensity.analyze(filePath);
             propComents.analyze(sourceCode);
 
             // Output
