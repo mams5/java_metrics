@@ -2,6 +2,7 @@ package main;
 
 import context.codeContext;
 import analyzer.methodSizes;
+import analyzer.structuresDensity;
 import report.reportGenerator;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -40,6 +41,7 @@ public class Main {
 
             // Features
             //methodSizes.analyze(sourceCode);
+            //structuresDensity.analyze(filePath);
 
             // Output
             reportGenerator.generateReport();
