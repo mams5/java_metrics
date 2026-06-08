@@ -1,6 +1,6 @@
 package main;
 
-import context.codeContext;
+import analyzer.lineLengh;
 import analyzer.methodSizes;
 import analyzer.structuresDensity;
 import report.reportGenerator;
@@ -40,6 +40,7 @@ public class Main {
             System.out.println("Iniciando análise...\n");
 
             // Features
+            lineLengh.analyze(sourceCode);
             //methodSizes.analyze(sourceCode);
             //structuresDensity.analyze(filePath);
 

@@ -1,5 +1,6 @@
 package report;
 
+import analyzer.lineLengh;
 import context.codeContext;
 import scoring.scoringEngine;
 
@@ -41,5 +42,26 @@ public class reportGenerator {
 
         System.out.println("Total de arquivos analisados pela structuresDensity: " + codeContext.structuresDensityResults.size());
         System.out.println("==================================================");
+
+        System.out.println("Métrica avaliada: Comprimento das Linhas");
+        System.out.println("--------------------------------------------------");
+        System.out.println("Total de linhas úteis analisadas : " + codeContext.totalUsefulLines);
+        System.out.println("Linhas adequadas (abaixo de 80)  : " + codeContext.linesBelowBenchmark);
+        System.out.println("Linhas acima do limite           : " + lineLengh.getViolations().size());
+        System.out.println("--------------------------------------------------");
+        System.out.printf("Porcentagem de linhas adequadas: %.2f%%\n", scoringEngine.getLineLengthPercentage());
+        System.out.println("==================================================");
+
+        if (!lineLengh.getViolations().isEmpty()) {
+            System.out.println("\nLinhas que podem ser melhoradas:");
+            System.out.println("--------------------------------------------------");
+            for (lineLengh.Violation v : lineLengh.getViolations()) {
+                System.out.printf("Linha %d | %d chars (+%d acima do limite)%n",
+                        v.lineNumber, v.lineLength, v.excess);
+                System.out.println("  Conteúdo  : " + v.content);
+                System.out.println("  Sugestão  : " + v.suggestion);
+                System.out.println();
+            }
+        }
     }
 }
