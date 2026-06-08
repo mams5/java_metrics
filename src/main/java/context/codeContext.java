@@ -6,13 +6,15 @@ import java.util.List;
 public class codeContext {
     // Benchmarks
     public static final int METHOD_LINE_BENCHMARK = 5;
+    public static final int LINE_LENGTH_BENCHMARK = 80;
 
     // Variáveis globais — methodSizes
     public static int totalMethods = 0;
     public static int methodsBelowBenchmark = 0;
 
-    // Benchmarks — lineLength
-    public static final int LINE_LENGTH_BENCHMARK = 80;
+    // ---- FEATURE 2: Proporção de Comentários ----
+    public static int usefulLines = 0;   
+    public static int totalCommentLines = 0; 
 
     // Variáveis globais — lineLength
     public static int totalUsefulLines = 0;
