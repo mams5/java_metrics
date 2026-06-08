@@ -20,4 +20,12 @@ public class scoringEngine {
         return ((double) codeContext.methodsBelowBenchmark / codeContext.totalMethods) * 100.0;
     }
 
+    // Calcula porcentagem de lineLength
+    public static double getLineLengthPercentage() {
+        if (codeContext.totalUsefulLines == 0) {
+            return 100.0;
+        }
+        return ((double) codeContext.linesBelowBenchmark / codeContext.totalUsefulLines) * 100.0;
+    }
+
 }

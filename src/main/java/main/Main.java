@@ -1,6 +1,6 @@
 package main;
 
-import context.codeContext;
+import analyzer.lineLengh;
 import analyzer.methodSizes;
 import report.reportGenerator;
 import java.nio.file.Files;
@@ -39,6 +39,7 @@ public class Main {
             System.out.println("Iniciando análise...\n");
 
             // Features
+            lineLengh.analyze(sourceCode);
             methodSizes.analyze(sourceCode);
 
             // Output
