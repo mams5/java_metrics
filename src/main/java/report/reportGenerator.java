@@ -16,9 +16,30 @@ public class reportGenerator {
         System.out.println("Total de unidades funcionais (métodos): " + codeContext.totalMethods);
         System.out.println("Métodos em conformidade (abaixo do limite): " + codeContext.methodsBelowBenchmark);
         System.out.println("--------------------------------------------------");
-        
+
         // Exibe a porcentagem final calculada pelo contexto
         System.out.printf("Porcentagem de métodos adequados: %.2f%%\n", scoringEngine.getCompliancePercentage());
+        System.out.println("--------------------------------------------------");
+        System.out.println("Métrica adicional: Densidade de Estruturas");
+        System.out.println("Fórmula: NDEC = 1 / (1 + (ESTRUTURAS * PROFUNDIDADE))");
+        System.out.println("Linhas úteis: exclui comentários e linhas em branco");
+
+        for (codeContext.StructuresDensityResult result : codeContext.structuresDensityResults) {
+            System.out.println("Arquivo: " + result.snippetName);
+            System.out.println("Linhas úteis: " + result.usefulLines);
+            System.out.println("Estruturas: " + result.structures);
+            System.out.printf("Profundidade média: %.2f%n", result.averageDepth);
+            System.out.printf("Estruturas por 10 linhas: %.2f%n", result.structuresPerTenLines);
+            System.out.printf("NDEC: %.4f%n", scoringEngine.calculateNdec(result.structuresPerTenLines, result.averageDepth));
+
+            if (!result.note.isEmpty()) {
+                System.out.println("Observação: " + result.note);
+            }
+
+            System.out.println("--------------------------------------------------");
+        }
+
+        System.out.println("Total de arquivos analisados pela structuresDensity: " + codeContext.structuresDensityResults.size());
         System.out.println("==================================================");
     }
 }

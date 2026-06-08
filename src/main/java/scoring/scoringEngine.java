@@ -20,4 +20,8 @@ public class scoringEngine {
         return ((double) codeContext.methodsBelowBenchmark / codeContext.totalMethods) * 100.0;
     }
 
+    public static double calculateNdec(double structuresPerTenLines, double averageDepth) {
+        return 1.0 / (1.0 + (structuresPerTenLines * averageDepth));
+    }
+
 }
