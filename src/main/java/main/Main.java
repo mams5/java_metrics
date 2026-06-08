@@ -1,5 +1,6 @@
 package main;
 
+import context.codeContext;
 import analyzer.methodSizes;
 import report.reportGenerator;
 import java.nio.file.Files;
@@ -41,7 +42,7 @@ public class Main {
             //methodSizes.analyze(sourceCode);
 
             // Output
-            reportGenerator.generateMethodSizes();
+            reportGenerator.generateReport();
 
         } catch (Exception e) {
             System.err.println("\nErro ao processar a análise: " + e.getMessage());
