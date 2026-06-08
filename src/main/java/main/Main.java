@@ -43,8 +43,6 @@ public class Main {
             methodSizes.analyze(sourceCode);
 
             // Output
-            reportGenerator.generateLineLengthReport();
-            System.out.println();
             reportGenerator.generateReport();
 
         } catch (Exception e) {
