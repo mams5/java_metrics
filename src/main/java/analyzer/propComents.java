@@ -11,16 +11,16 @@ import java.util.Set;
 public class propComents {
 
     public static void analyze(String sourceCode) {
-        CompilationUnit cu = StaticJavaParser.parse(sourceCode);
+        CompilationUnit CompUnit = StaticJavaParser.parse(sourceCode);
 
         // Se o totalMethods estiver zerado garantimos a contagem aqui
         if (codeContext.totalMethods == 0) {
-            codeContext.totalMethods = cu.findAll(MethodDeclaration.class).size();
+            codeContext.totalMethods = CompUnit.findAll(MethodDeclaration.class).size();
         }
 
         // mapea todas as linhas que possuem comentários
         Set<Integer> commentLines = new HashSet<>();
-        for (Comment comment : cu.getAllComments()) {
+        for (Comment comment : CompUnit.getAllComments()) {
             if (comment.getRange().isPresent()) {
                 int startLine = comment.getRange().get().begin.line;
                 int endLine = comment.getRange().get().end.line;
