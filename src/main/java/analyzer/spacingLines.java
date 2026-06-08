@@ -45,7 +45,7 @@ import java.util.regex.Pattern;
  *   - Não cobre código gerado automaticamente (boilerplate).
  *   - Pesos são hipótese inicial — serão ajustados na Fase 2 com dataset CODE-UP.
  */
-public class SpacingLines {
+public class spacingLines {
 
     // ─── Constantes ────────────────────────────────────────────────────────
 
