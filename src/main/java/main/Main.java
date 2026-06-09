@@ -3,6 +3,7 @@ package main;
 import analyzer.lineLengh;
 import analyzer.methodSizes;
 import analyzer.structuresDensity;
+import context.codeContext;
 import analyzer.propComents;
 import analyzer.spacingLines; // Importando sua nova feature
 import context.codeContext;
