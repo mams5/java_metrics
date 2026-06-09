@@ -63,20 +63,5 @@ public class reportGenerator {
                 System.out.println();
             }
         }
-
-        System.out.println("Métrica avaliada: Proporção de Comentários:");
-        System.out.println("Linhas Úteis: " + codeContext.totalUsefulLines);
-        System.out.println("Linhas de Comentários: " + codeContext.totalCommentLines);
-        System.out.println("--------------------------------------------------");
-        
-        // Exibe o cálculo detalhado para conferência
-        double benchmarkAtual = (codeContext.totalUsefulLines / 10.0) + (codeContext.totalMethods * 2.0);
-        System.out.printf("Benchmark calculado: %.2f\n", benchmarkAtual);
-        
-        // Multiplica por 100 para exibir em formato de nota percentual ou deixa de 0 a 1
-        double npc = scoringEngine.getNpcScore();
-        System.out.printf("Nota NPC (0 a 1): %.2f\n", npc);
-        System.out.println("==================================================");
-        
     }
 }
