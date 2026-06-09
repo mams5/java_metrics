@@ -3,6 +3,9 @@ package main;
 import analyzer.lineLengh;
 import analyzer.methodSizes;
 import analyzer.structuresDensity;
+import analyzer.propComents;
+import analyzer.spacingLines; // Importando sua nova feature
+import context.codeContext;
 import report.reportGenerator;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -39,12 +42,16 @@ public class Main {
             System.out.println("\nArquivo carregado com sucesso!");
             System.out.println("Iniciando análise...\n");
 
-            // Features
+            // Features executadas em sequência
             lineLengh.analyze(sourceCode);
             //methodSizes.analyze(sourceCode);
-            //structuresDensity.analyze(filePath);
+            structuresDensity.analyze(filePath);
+            propComents.analyze(sourceCode);
+            
+            // Executando a sua feature de Espaçamento Vertical (NELB)
+            spacingLines.analyze(filePath, sourceCode);
 
-            // Output
+            // Output - Relatório completo unificado
             reportGenerator.generateReport();
 
         } catch (Exception e) {
