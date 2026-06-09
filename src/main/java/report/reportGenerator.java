@@ -1,6 +1,6 @@
 package report;
 
-import analyzer.lineLengh;
+import analyzer.lineLengh; // Mantenha a grafia original do import do seu grupo (lineLengh)
 import context.codeContext;
 import scoring.scoringEngine;
 
@@ -73,10 +73,26 @@ public class reportGenerator {
         double benchmarkAtual = (codeContext.totalUsefulLines / 10.0) + (codeContext.totalMethods * 2.0);
         System.out.printf("Benchmark calculado: %.2f\n", benchmarkAtual);
         
-        // Multiplica por 100 para exibir em formato de nota percentual ou deixa de 0 a 1
         double npc = scoringEngine.getNpcScore();
         System.out.printf("Nota NPC (0 a 1): %.2f\n", npc);
         System.out.println("==================================================");
         
+        // --- ADICIONADO: Seção de Espaçamento Vertical (NELB) ---
+        if (!codeContext.spacingLinesResults.isEmpty()) {
+            System.out.println("Métrica avaliada: Espaçamento e Linhas em Branco (NELB)");
+            System.out.println("Fundamentação: Buse & Weimer (2010) e ICPC (2024)");
+            System.out.println("--------------------------------------------------");
+            for (codeContext.SpacingLinesResult result : codeContext.spacingLinesResults) {
+                System.out.println("Arquivo Analisado: " + result.fileName);
+                System.out.println("Total de Linhas Físicas: " + result.totalLines);
+                System.out.println("Linhas em Branco: " + result.blankLines);
+                System.out.println("Métodos Detectados: " + result.methodCount);
+                
+                double notaFinalNelb = scoringEngine.calculateNelbScore(result);
+                System.out.printf("👉 NOTA NELB DE LEGIBILIDADE VERTICAL: %.2f / 100.00\n", notaFinalNelb);
+                System.out.println("--------------------------------------------------");
+            }
+            System.out.println("==================================================");
+        }
     }
 }
