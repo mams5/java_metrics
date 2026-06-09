@@ -1,8 +1,10 @@
 package main;
 
-import context.codeContext;
-import analyzer.methodSizes;
+import analyzer.lineLengh;
+//import analyzer.methodSizes;
 import analyzer.structuresDensity;
+import context.codeContext;
+import analyzer.propComents;
 import report.reportGenerator;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -40,8 +42,10 @@ public class Main {
             System.out.println("Iniciando análise...\n");
 
             // Features
+            lineLengh.analyze(sourceCode);
             //methodSizes.analyze(sourceCode);
-            //structuresDensity.analyze(filePath);
+            structuresDensity.analyze(filePath);
+            propComents.analyze(sourceCode);
 
             // Output
             reportGenerator.generateReport();
