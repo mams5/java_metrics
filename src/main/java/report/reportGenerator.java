@@ -68,15 +68,11 @@ public class reportGenerator {
             System.out.println(row("  Profundidade média: " + formatDouble(result.averageDepth, 2)));
             System.out.println(row("  Estruturas por 10 linhas: " + formatDouble(result.structuresPerTenLines, 2)));
             System.out.println(row("  NDEC: " + formatDouble(ndc, 4)));
-            System.out.println(row("  Fonte: " + (result.parsedWithAst ? "AST" : "fallback textual")));
-            System.out.println(row("  Avaliação: " + classify(ndc)));
             System.out.println(emptyRow());
         }
 
         System.out.println(BORDER_77);
-        System.out.println(row("TOTAL DE SNIPPETS: " + densityResults.size()));
-        System.out.println(row("MÉDIA NDEC GLOBAL: " + formatDouble(densityScore, 4)));
-        System.out.println(row("CLASSIFICAÇÃO GERAL: " + classify(densityScore)));
+        System.out.println(row("CLASSIFICAÇÃO: " + classify(densityScore)));
         System.out.println(BORDER_77);
     }
 
@@ -130,32 +126,6 @@ public class reportGenerator {
         System.out.println(BORDER_77);
         System.out.println(row("CLASSIFICAÇÃO: " + classify(lineScore)));
         System.out.println(BORDER_77);
-        System.out.println(emptyRow());
-        System.out.println(row("LINHAS QUE EXCEDEM O LIMITE:"));
-        System.out.println(emptyRow());
-
-        if (lineLengh.getViolations().isEmpty()) {
-            System.out.println(row("  Nenhuma violação encontrada."));
-        } else {
-            int shown = 0;
-            for (lineLengh.Violation violation : lineLengh.getViolations()) {
-                if (shown == 5) {
-                    int remaining = lineLengh.getViolations().size() - shown;
-                    System.out.println(row("  ... e mais " + remaining + " violações não exibidas"));
-                    break;
-                }
-
-                String header = String.format(Locale.US,
-                        "Linha %d | %d caracteres | Excesso: +%d | Sugestão: %s",
-                        violation.lineNumber, violation.lineLength, violation.excess, violation.suggestion);
-                System.out.println(row(header));
-                System.out.println(row("  Conteúdo: " + violation.content));
-                System.out.println(emptyRow());
-                shown++;
-            }
-        }
-
-        System.out.println(BORDER_77);
     }
 
     private static void printSpacingSection(List<codeContext.SpacingLinesResult> spacingResults, double spacingScore) {
@@ -177,15 +147,12 @@ public class reportGenerator {
                 System.out.println(row("Proporção de linhas em branco: " + formatDouble(result.totalLines == 0 ? 0.0 : (result.blankLines * 100.0 / result.totalLines), 2) + "%"));
                 System.out.println(row("Linhas em branco consecutivas (2 ou mais): " + result.excessiveBlankLinesCount + " ocorrências"));
                 System.out.println(row("Nota NELB: " + formatDouble(resultScore, 4)));
+                System.out.println(emptyRow());
+                System.out.println(BORDER_77);
                 System.out.println(row("CLASSIFICAÇÃO: " + classify(resultScore)));
-                System.out.println(emptyRow());
-                System.out.println(row("OBSERVAÇÕES:"));
-                System.out.println(row("  " + buildSpacingObservation(result)));
-                System.out.println(emptyRow());
+                System.out.println(BORDER_77);
             }
         }
-
-        System.out.println(BORDER_77);
     }
 
     private static void printSummarySection(double densityScore, double methodScore, double commentScore, double lineScore, double spacingScore) {

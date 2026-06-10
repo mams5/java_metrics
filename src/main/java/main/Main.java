@@ -45,11 +45,9 @@ public class Main {
 
             // Features executadas em sequência
             lineLengh.analyze(sourceCode);
-            //methodSizes.analyze(sourceCode);
+            methodSizes.analyze(sourceCode);
             structuresDensity.analyze(filePath);
             propComents.analyze(sourceCode);
-            
-            // Executando a sua feature de Espaçamento Vertical (NELB)
             spacingLines.analyze(filePath, sourceCode);
 
             // Output - Relatório completo unificado
