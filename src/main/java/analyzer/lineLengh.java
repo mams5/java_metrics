@@ -33,6 +33,7 @@ public class lineLengh {
         violations.clear();
         codeContext.totalUsefulLines = 0;
         codeContext.linesBelowBenchmark = 0;
+        codeContext.totalViolationWeight = 0;
 
         String[] lines = sourceCode.split("\\r?\\n", -1);
         boolean inBlockComment = false;
@@ -61,7 +62,15 @@ public class lineLengh {
                 continue;
             }
 
+            // Conta em totalUsefulLines (usado pelo benchmark de comentários)
             codeContext.totalUsefulLines++;
+
+            // Linhas puramente estruturais (chaves isoladas) não representam
+            // decisões de comprimento — ignoradas no cálculo da métrica,
+            // seguindo o mesmo critério de methodSizes.
+            if (trimmed.equals("{") || trimmed.equals("}") || trimmed.equals("};") || trimmed.equals("},")) {
+                continue;
+            }
 
             String effectiveLine = stripInlineComment(line);
             int length = effectiveLine.length();
@@ -70,6 +79,10 @@ public class lineLengh {
                 codeContext.linesBelowBenchmark++;
             } else {
                 int excess = length - codeContext.LINE_LENGTH_BENCHMARK;
+                // Linhas muito acima do limite pesam proporcionalmente:
+                // 80-159 chars → peso 1 | 160-239 → peso 2 | 240+ → peso 3 etc.
+                int weight = length / codeContext.LINE_LENGTH_BENCHMARK;
+                codeContext.totalViolationWeight += weight;
                 violations.add(new Violation(
                     i + 1,
                     length,
