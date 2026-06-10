@@ -39,17 +39,16 @@ public class Main {
 
             // Lê todas as linhas do arquivo informado
             String sourceCode = Files.readString(filePath);
+            codeContext.analyzedFileName = filePath.getFileName().toString();
 
             System.out.println("\nArquivo carregado com sucesso!");
             System.out.println("Iniciando análise...\n");
 
             // Features executadas em sequência
             lineLengh.analyze(sourceCode);
-            //methodSizes.analyze(sourceCode);
+            methodSizes.analyze(sourceCode);
             structuresDensity.analyze(filePath);
             propComents.analyze(sourceCode);
-            
-            // Executando a sua feature de Espaçamento Vertical (NELB)
             spacingLines.analyze(filePath, sourceCode);
 
             // Output - Relatório completo unificado

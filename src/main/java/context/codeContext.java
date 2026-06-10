@@ -8,6 +8,9 @@ public class codeContext {
     public static final int METHOD_LINE_BENCHMARK = 5;
     public static final int LINE_LENGTH_BENCHMARK = 80;
 
+    // Arquivo analisado na execução atual
+    public static String analyzedFileName = "";
+
     // Variáveis globais — methodSizes
     public static int totalMethods = 0;
     public static int methodsBelowBenchmark = 0;
