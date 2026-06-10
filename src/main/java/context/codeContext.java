@@ -22,6 +22,7 @@ public class codeContext {
     // Variáveis globais — lineLength
     public static int totalUsefulLines = 0;
     public static int linesBelowBenchmark = 0;
+    public static int totalViolationWeight = 0;
 
     // Listas de resultados das features
     public static final List<StructuresDensityResult> structuresDensityResults = new ArrayList<>();

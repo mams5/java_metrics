@@ -79,12 +79,16 @@ public class scoringEngine {
         return 1.0 / (1.0 + (structuresPerTenLines * averageDepth));
     }
 
-    // Calcula porcentagem de lineLength
+    // Calcula porcentagem de lineLength.
+    // Denominador = linhas curtas + peso total das violações.
+    // Violações pesam (length / BENCHMARK): uma linha de 240 chars conta como 3 violações,
+    // penalizando código com linhas extremamente longas de forma proporcional.
     public static double getLineLengthPercentage() {
-        if (codeContext.totalUsefulLines == 0) {
+        int denominator = codeContext.linesBelowBenchmark + codeContext.totalViolationWeight;
+        if (denominator == 0) {
             return 100.0;
         }
-        return ((double) codeContext.linesBelowBenchmark / codeContext.totalUsefulLines) * 100.0;
+        return ((double) codeContext.linesBelowBenchmark / denominator) * 100.0;
     }
     
     // Calcula a proporção de comentários do time
