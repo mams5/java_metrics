@@ -2,13 +2,69 @@ package scoring;
 
 import context.codeContext;
 
+import java.util.List;
+
 public class scoringEngine {
 
-    // Soma nota final de 0 a 5
-    public static int finalScore (/* resultados das features*/){
-        int resultado = 0;
-        //realiza soma
-        return resultado;
+    public static double getDensityScore() {
+        List<codeContext.StructuresDensityResult> results = codeContext.structuresDensityResults;
+        if (results.isEmpty()) {
+            return 0.0;
+        }
+
+        double total = 0.0;
+        for (codeContext.StructuresDensityResult result : results) {
+            total += result.score;
+        }
+        return total / results.size();
+    }
+
+    public static double getMethodScore() {
+        return normalizePercentage(getCompliancePercentage());
+    }
+
+    public static double getCommentScore() {
+        return getNpcScore();
+    }
+
+    public static double getLineScore() {
+        return normalizePercentage(getLineLengthPercentage());
+    }
+
+    public static double getSpacingScore() {
+        List<codeContext.SpacingLinesResult> results = codeContext.spacingLinesResults;
+        if (results.isEmpty()) {
+            return 0.0;
+        }
+
+        double total = 0.0;
+        for (codeContext.SpacingLinesResult result : results) {
+            total += calculateNelbNormalizedScore(result);
+        }
+        return total / results.size();
+    }
+
+    public static double getFinalScore() {
+        return getDensityScore() + getMethodScore() + getCommentScore() + getLineScore() + getSpacingScore();
+    }
+
+    public static double calculateNelbNormalizedScore(codeContext.SpacingLinesResult result) {
+        return calculateNelbScore(result) / 100.0;
+    }
+
+    public static double getCommentRatio() {
+        if (codeContext.usefulLines == 0) {
+            return 0.0;
+        }
+        return (double) codeContext.totalCommentLines * 100.0 / codeContext.usefulLines;
+    }
+
+    public static double getCommentBenchmark() {
+        return (codeContext.totalUsefulLines / 10.0) + (codeContext.totalMethods * 2.0);
+    }
+
+    private static double normalizePercentage(double scorePercentage) {
+        return Math.max(0.0, Math.min(1.0, scorePercentage / 100.0));
     }
 
     // Calcula porcentagem de methodSizes
@@ -35,7 +91,7 @@ public class scoringEngine {
     public static double getNpcScore() {
         if (codeContext.totalUsefulLines == 0 && codeContext.totalMethods == 0) return 0.0;
 
-        double benchmark = (codeContext.totalUsefulLines / 10.0) + (codeContext.totalMethods * 2.0);
+        double benchmark = getCommentBenchmark();
 
         if (benchmark == 0) return 0.0; // Previne divisão por zero
 
