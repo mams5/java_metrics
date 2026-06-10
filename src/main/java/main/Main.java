@@ -39,6 +39,7 @@ public class Main {
 
             // Lê todas as linhas do arquivo informado
             String sourceCode = Files.readString(filePath);
+            codeContext.analyzedFileName = filePath.getFileName().toString();
 
             System.out.println("\nArquivo carregado com sucesso!");
             System.out.println("Iniciando análise...\n");

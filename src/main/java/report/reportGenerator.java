@@ -30,10 +30,11 @@ public class reportGenerator {
         System.out.println(center("RELATÓRIO DE MANUTENABILIDADE DE CÓDIGO", 80));
         System.out.println(BORDER_80);
         System.out.println("Data da análise: " + LocalDateTime.now().format(DATE_FORMATTER));
-        System.out.println("Total de snippets analisados: " + densityResults.size());
         System.out.println(BORDER_80);
         System.out.println();
 
+        printAnalyzedFileSection();
+        System.out.println();
         printDensitySection(densityResults, densityScore);
         System.out.println();
         printMethodSection(methodScore);
@@ -52,6 +53,29 @@ public class reportGenerator {
         System.out.println(BORDER_80);
     }
 
+    private static void printAnalyzedFileSection() {
+        System.out.println(BORDER_77);
+        System.out.println(row("ARQUIVO ANALISADO"));
+        System.out.println(BORDER_77);
+        System.out.println(emptyRow());
+        System.out.println(row("Arquivo: " + resolveAnalyzedFileName()));
+        System.out.println(emptyRow());
+        System.out.println(BORDER_77);
+    }
+
+    private static String resolveAnalyzedFileName() {
+        if (!codeContext.analyzedFileName.isEmpty()) {
+            return codeContext.analyzedFileName;
+        }
+        if (!codeContext.structuresDensityResults.isEmpty()) {
+            return codeContext.structuresDensityResults.get(0).snippetName;
+        }
+        if (!codeContext.spacingLinesResults.isEmpty()) {
+            return codeContext.spacingLinesResults.get(0).fileName;
+        }
+        return "Não informado";
+    }
+
     private static void printDensitySection(List<codeContext.StructuresDensityResult> densityResults, double densityScore) {
         System.out.println(BORDER_77);
         System.out.println(row("DENSIDADE DE ESTRUTURAS (Structural Density)"));
@@ -60,14 +84,17 @@ public class reportGenerator {
         System.out.println(BORDER_77);
         System.out.println(emptyRow());
 
-        for (codeContext.StructuresDensityResult result : densityResults) {
+        if (densityResults.isEmpty()) {
+            System.out.println(row("Nenhum resultado de densidade disponível."));
+            System.out.println(emptyRow());
+        } else {
+            codeContext.StructuresDensityResult result = densityResults.get(0);
             double ndc = scoringEngine.calculateNdec(result.structuresPerTenLines, result.averageDepth);
-            System.out.println(row("Snippet: " + result.snippetName));
-            System.out.println(row("  Linhas úteis: " + result.usefulLines));
-            System.out.println(row("  Estruturas (if/for/while/try): " + result.structures));
-            System.out.println(row("  Profundidade média: " + formatDouble(result.averageDepth, 2)));
-            System.out.println(row("  Estruturas por 10 linhas: " + formatDouble(result.structuresPerTenLines, 2)));
-            System.out.println(row("  NDEC: " + formatDouble(ndc, 4)));
+            System.out.println(row("Linhas úteis: " + result.usefulLines));
+            System.out.println(row("Estruturas (if/for/while/try): " + result.structures));
+            System.out.println(row("Profundidade média: " + formatDouble(result.averageDepth, 2)));
+            System.out.println(row("Estruturas por 10 linhas: " + formatDouble(result.structuresPerTenLines, 2)));
+            System.out.println(row("NDEC: " + formatDouble(ndc, 4)));
             System.out.println(emptyRow());
         }
 
